@@ -1,0 +1,41 @@
+
+.logo{
+    width: 220px;
+    height: 120px;
+    max-height: 250px !important;
+    
+      }
+
+.caja-logo{
+    padding: 0.6rem;
+}
+
+ul{
+    list-style:none;
+    }
+
+.active{
+    color:#fff !important;
+}
+
+.tabla{
+    padding-top:40px;
+    padding-bottom: 40px;
+}
+
+.info{
+    background: #80dfff;
+}
+
+.TitleFundacion{
+    color: #fff;
+}
+
+.shelf{
+    background-color: #004d99 !important;
+}
+
+.TitleArticle{
+    background-color: #ffd11a !important; 
+    color:#000;
+}
