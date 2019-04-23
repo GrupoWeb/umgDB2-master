@@ -12,9 +12,9 @@
 */
 
 use Illuminate\Http\Request; 
-
+ 
 Route::get('/', function () {
-    return view('principal');
+    return view('main');
 });
 Route::any('/operation', function (Request $request) {
   $query = $request->input('query');

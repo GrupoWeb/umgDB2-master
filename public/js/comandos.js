@@ -2,6 +2,47 @@ function CargarPagina(contenedor,pagina){
     $(contenedor).load(pagina);
 }
 
+
+/*DB2*/
+
+function CreateSQL(form){
+    $(form).submit(function(e){
+        e.preventDefault();
+        let parametros = $(this).serialize();
+        $.ajax({
+            data: parametros,
+            url: 'operation?query=',
+            type: "get",
+            contentType: false,
+                cache: false,
+                processData: false,
+            success: function(response){
+                // $('#resultado').html(response);
+                // $('#resultado').show();
+                    swal({
+                        title: "Editor SQL",
+                        text: response,
+                        icon: "success",
+                        button: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            Iniciar('../resources/views/layaout/dml.php','Grupo 2');
+                        } 
+                      });
+            }
+        })
+       
+    })
+}
+
+
+/*FIN DB2 */
+
+
+
+
 function addCapacitacion(form){
     $(form).submit(function(e){
         e.preventDefault();
@@ -378,6 +419,7 @@ function addAdjunto(form){
     $(form).submit(function(e){
         e.preventDefault();
         let parametros = $(this).serialize();
+        console.log(parametros);
         $.ajax({
             data: new FormData(this),
             url: 'model/php/uploadfile.php',

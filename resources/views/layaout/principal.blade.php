@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Fundación Olimpica Guatemalteca</title>
+    <title>@yield('titulo')</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -37,7 +37,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <h5 class="TitleFundacion">Fundación Olimpica Guatemalteca</h5>
+                    @yield('Title')
                 </div>
 
             </div>
@@ -45,26 +45,11 @@
         <div class="sidebar-fixed position-fixed ">
 
             <a class="caja-logo waves-effect" onClick="Iniciar('view/main.php','Dashboard')">
-                <img src="img/logo.jpg" class="logo" alt="">
+                @yield('logo') 
             </a>
 
             <div class="list-group list-group-flush" id="menu">
-                <ul>
-                    <li><a onClick="Iniciar('view/main.php','Dashboard')" id="dash" class="list-group-item list-group-item-action active waves-effect">
-                        <i class="fa fa-pie-chart mr-3"></i>Dashboard
-                    </a></li>
-                    <li><a onClick="Iniciar('view/capacitador.php','Capacitadores')"  id="capacitadores" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-user mr-3"></i>Capacitadores</a></li>
-                    <li><a   onClick="Iniciar('view/capacitacion.php','Capacitaciones')" id="capacitaciones" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-table mr-3"></i>Capacitaciones</a></li>
-                    <li><a onClick="Iniciar('view/preguntas.php','Preguntas')" id="preguntas" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-map mr-3"></i>Preguntas</a></li>
-                    <li><a onClick="Iniciar('view/ingresoCapa.php','Control de Capacitaciones')" id="ingreso" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-money mr-3"></i>Ingresos</a></li>
-                    <li><a onClick="Iniciar('view/indicadores.php','Indicadores')" id="reportes" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-money mr-3"></i>Indicadores</a></li>
-                </ul>
-                
+                @yield('Menu')
             </div>
 
         </div>
@@ -76,7 +61,7 @@
                         <h4 class="mb-2 mb-sm-0 pt-1">
                             <a onClick="Iniciar('view/main.php','Dashboard')" class="red-text" >Inicio</a>
                             <span>/</span>
-                            <span id="ruta">Dashboard</span>
+                            <span id="ruta">Dashboard BI</span>
                         </h4>
                     </div>
                 </div>
