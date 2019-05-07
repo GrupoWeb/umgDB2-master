@@ -28,9 +28,6 @@ Route::any('/operation', function (Request $request) {
     }else if(strpos($query, 'update')!== false){
       $op=DB::update($query);
       return "registro actualizado correctamente";
-    } else if(strpos($query, 'show')!== false){
-      $op=DB::select($query);
-      return dd($op[0]->Tables_in_ejemplo);
     } 
     else{
       return "operacion no admitida";
