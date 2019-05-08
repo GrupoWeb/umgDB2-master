@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -15,7 +16,13 @@ class MenuController extends Controller
     }
 
     public function mDato(){
-        return view('menu.mDato');
+      $op=DB::select("show tables");
+      $tables=[];
+      foreach ($op as $table => $value) {
+        $fields=DB::select('describe '.$value->Tables_in_ejemplo);
+        $op[$table]->fields = $fields;
+      }
+      return view('menu.mDato',compact('op'));
     }
 
     public function dDato(){

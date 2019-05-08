@@ -13,7 +13,7 @@
                             </form>
                     </div>
             </div>
-        </div> 
+        </div>
         <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                 <div class="card mb-3">
                     <div class="card-header text-left">
@@ -26,7 +26,7 @@
                                         <option value="`apellido`" title="">apellido</option>
                                         <option value="`edad`" title="">edad</option>
                                 </select>
-                                
+
                         </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             $(document).ready(function(){
                 CreateSQL('#create');
                 llenarCombos('model/php/comboCapacitaciones.php', '#showTables', 'idCapacitacion', 'descripcion')
-            
+
                 $('#resultado').hide();
             })
             </script>

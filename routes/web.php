@@ -11,8 +11,8 @@
 |
 */
 
-use Illuminate\Http\Request; 
- 
+use Illuminate\Http\Request;
+
 // Route::get('/', function () {
 //     return view('master');
 // });
@@ -45,7 +45,7 @@ Route::any('/operation', function (Request $request) {
     }else if(strpos($query, 'update')!== false){
       $op=DB::update($query);
       return "registro actualizado correctamente";
-    } 
+    }
     else{
       return "operacion no admitida";
     }
@@ -53,4 +53,14 @@ Route::any('/operation', function (Request $request) {
     return $e->errorInfo[2];
   }
 
+});
+
+Route::any('/infotablas', function () {
+    $op=DB::select("show tables");
+    $tables=[];
+    foreach ($op as $table => $value) {
+      $fields=DB::select('describe '.$value->Tables_in_ejemplo);
+      $op[$table]->fields = $fields;
+    }
+    return $op;
 });
