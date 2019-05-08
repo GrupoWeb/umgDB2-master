@@ -61,12 +61,20 @@
                         <h4 class="mb-2 mb-sm-0 pt-1">
                             <a onClick="Iniciar('view/main.php','Dashboard')" class="red-text" >Inicio</a>
                             <span>/</span>
-                            <span id="ruta">Dashboard BI</span>
+                            <span >@yield('lugar')</span>
                         </h4>
                     </div>
                 </div>
         </div>
-        <div class="container-fluid mt-5" id="contenedor">    
+        <div class="container-fluid mt-5" id="contenedor"> 
+            
+            {{-- Inicio de los menus --}}
+
+            @yield('Contenido')
+            
+
+            {{-- final de los menus --}}
+
         </div>
     </main>
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

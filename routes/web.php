@@ -13,9 +13,26 @@
 
 use Illuminate\Http\Request; 
  
-Route::get('/', function () {
-    return view('main');
-});
+// Route::get('/', function () {
+//     return view('master');
+// });
+
+//Rutas Predeterminadas del Menu
+
+Route::get('/','MenuController@index');
+Route::get('/rDatos','MenuController@rDato');
+Route::get('/mDatos','MenuController@mDato');
+Route::get('/dDatos','MenuController@dDato');
+Route::get('/cDatos','MenuController@cDato');
+Route::get('/oDatos','MenuController@oDato');
+
+//---------------------------------------------------
+
+
+
+
+
+
 Route::any('/operation', function (Request $request) {
   $query = $request->input('query');
   try{
