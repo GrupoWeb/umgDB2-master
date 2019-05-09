@@ -28,7 +28,10 @@ function CreateSQL(form){
                       })
                       .then((willDelete) => {
                         if (willDelete) {
-                            Iniciar('../resources/views/layaout/dml.php','Grupo 2');
+                            // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
+                            var url = "http://localhost/umgDB2-master/public/mDatos"; 
+                            $(location).attr('href',url);
+                           
                         } 
                       });
             }

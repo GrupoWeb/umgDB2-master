@@ -84,7 +84,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="css/DataTables/datatables.js"></script>
     <script src="js/sweetalert.min.js"></script>
-    <script type="text/javascript" src="Date/src/DateTimePicker.js"></script>
+    {{-- <script type="text/javascript" src="Date/src/DateTimePicker.js"></script> --}}
     
     <!-- MDB core JavaScript -->
     <!-- <script type="text/javascript" src="include/js/mdb.min.js"></script> -->

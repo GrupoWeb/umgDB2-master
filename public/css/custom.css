@@ -39,3 +39,11 @@ ul{
     background-color: #ffd11a !important; 
     color:#000;
 }
+
+.panel-body{
+    padding-left: 15px !important;
+}
+
+.seleccion{
+    cursor: pointer;
+}

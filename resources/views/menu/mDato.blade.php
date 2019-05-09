@@ -12,7 +12,7 @@
 @endsection
 
 @section('Menu')
-<ul>
+<ul> 
     <li>
         <a href="{{ action('MenuController@index') }}" id="dash" class="list-group-item list-group-item-action  waves-effect">
             <i class="fa fa-pie-chart mr-3"></i>Dashboard BI
@@ -51,5 +51,5 @@
 @endsection
 
 @section('Contenido')
-    @include('contenedor.mDato')
+        @include('contenedor.mDato',['op'=>$op])
 @endsection

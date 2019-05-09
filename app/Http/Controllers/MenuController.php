@@ -16,14 +16,23 @@ class MenuController extends Controller
     }
 
     public function mDato(){
-      $op=DB::select("show tables");
-      $tables=[];
-      foreach ($op as $table => $value) {
-        $fields=DB::select('describe '.$value->Tables_in_ejemplo);
-        $op[$table]->fields = $fields;
-      }
-      return view('menu.mDato',compact('op'));
-    }
+    //   $op=DB::select("show tables");
+    //   $tables=[];
+    //   foreach ($op as $table => $value) {
+    //     $fields=DB::select('describe '.$value->Tables_in_ejemplo);
+    //     $op[$table]->fields = $fields;
+    //   }
+            $op=DB::select("show tables");
+            $tables=[];
+            foreach ($op as $table => $value) {
+            $fields=[];
+            foreach ($value as $key => $val) {
+                $fields=DB::select('describe '.$val);
+            }
+            $op[$table]->fields = $fields;
+            }
+            return view('menu.mDato')->with(['op' => $op]);
+            }
 
     public function dDato(){
         return view('menu.dDato');
