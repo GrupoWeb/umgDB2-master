@@ -1,5 +1,5 @@
 <div class="row wow fadeIn">
-        
+
         <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
             <div class="card mb-8">
                 <div class="card-header text-left">
@@ -14,7 +14,7 @@
                             </form>
                     </div>
             </div>
-        </div> 
+        </div>
         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="card mb-4">
                     <div class="card-header text-left">
@@ -28,14 +28,14 @@
                                         @foreach($op as $key)
                                             <div class="card-header">
                                                 <h5 class="mb-0">
-                                                    <a  data-toggle="collapse" data-parent="#accordionData" href="#collapse<?php echo $x; ?>">{{ $key->Tables_in_db2 }}
+                                                    <a  data-toggle="collapse" data-parent="#accordionData" href="#collapse<?php echo $x; ?>">{{ $key->tablename }}
                                                     </a>
                                                 </h5>
                                             </div>
                                             @foreach ($key->fields as $item)
                                                 <div  id="collapse<?php echo $x; ?>" class="panel-collapse collapse">
                                                     <div onClick="copyText(this.id);"  id="{{ $item->Field }}" class="panel-body seleccion">
-                                                        {{ $item->Field }} 
+                                                        {{ $item->Field }}
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -43,7 +43,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            @endif   
+                            @endif
                         </div>
                 </div>
             </div>
@@ -63,4 +63,3 @@
                 $('#editorSQL').val(message);
             }
     </script>
-

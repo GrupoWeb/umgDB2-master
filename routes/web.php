@@ -60,9 +60,12 @@ Route::any('/infotablas', function () {
     $tables=[];
     foreach ($op as $table => $value) {
       $fields=[];
+      $tablename;
       foreach ($value as $key => $val) {
+        $tablename = $val;
         $fields=DB::select('describe '.$val);
       }
+      $op[$table]->tablename = $tablename;
       $op[$table]->fields = $fields;
     }
     return $op;

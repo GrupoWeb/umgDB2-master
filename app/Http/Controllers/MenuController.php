@@ -22,17 +22,21 @@ class MenuController extends Controller
     //     $fields=DB::select('describe '.$value->Tables_in_ejemplo);
     //     $op[$table]->fields = $fields;
     //   }
-            $op=DB::select("show tables");
-            $tables=[];
-            foreach ($op as $table => $value) {
-            $fields=[];
-            foreach ($value as $key => $val) {
-                $fields=DB::select('describe '.$val);
-            }
-            $op[$table]->fields = $fields;
-            }
-            return view('menu.mDato')->with(['op' => $op]);
-            }
+        $op=DB::select("show tables");
+        $tables=[];
+        foreach ($op as $table => $value) {
+          $fields=[];
+          $tablename;
+          foreach ($value as $key => $val) {
+            $tablename = $val;
+            $fields=DB::select('describe '.$val);
+          }
+          $op[$table]->tablename = $tablename;
+          $op[$table]->fields = $fields;
+        }
+  
+        return view('menu.mDato')->with(['op' => $op]);
+    }
 
     public function dDato(){
         return view('menu.dDato');
