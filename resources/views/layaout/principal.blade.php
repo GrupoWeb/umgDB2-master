@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" type="text/css" href="css/DataTables/datatables.css"/>
     <link rel="stylesheet" type="text/css" href="Date/src/DateTimePicker.css" />
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
  
     
 </head>
@@ -91,7 +91,11 @@
     <script src="js/comandos.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/Grafico/google.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vuex.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     <!-- Initializations -->
+    @yield('vue')
 
 </body>
 
