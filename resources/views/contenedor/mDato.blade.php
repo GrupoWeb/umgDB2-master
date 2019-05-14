@@ -28,7 +28,8 @@
                                         @foreach($op as $key)
                                             <div class="card-header">
                                                 <h5 class="mb-0">
-                                                    <a  data-toggle="collapse" data-parent="#accordionData" href="#collapse<?php echo $x; ?>">{{ $key->tablename }}
+                                                    <a  data-toggle="collapse" data-parent="#accordionData" href="#collapse<?php echo $x; ?>">
+                                                        {{ $key->tablename }}
                                                     </a>
                                                 </h5>
                                             </div>
@@ -58,6 +59,7 @@
             })
 
             function copyText(texto){
+                
                 var message = $('textarea#editorSQL').val();
                 message = message + texto;
                 $('#editorSQL').val(message);

@@ -16,12 +16,6 @@ class MenuController extends Controller
     }
 
     public function mDato(){
-    //   $op=DB::select("show tables");
-    //   $tables=[];
-    //   foreach ($op as $table => $value) {
-    //     $fields=DB::select('describe '.$value->Tables_in_ejemplo);
-    //     $op[$table]->fields = $fields;
-    //   }
         $op=DB::select("show tables");
         $tables=[];
         foreach ($op as $table => $value) {
@@ -39,6 +33,7 @@ class MenuController extends Controller
     }
 
     public function dDato(){
+        
         return view('menu.dDato');
     }
 

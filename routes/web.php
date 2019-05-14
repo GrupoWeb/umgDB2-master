@@ -55,6 +55,27 @@ Route::any('/operation', function (Request $request) {
 
 });
 
+Route::any('/DDL',function(Request $request){
+  $sql = $request->input('query');
+  try {
+    if(strpos(strtolower($sql), 'create')!== false){
+      $operacion = DB::statement($sql);
+      return "intruccion realizada con exito";
+    }else if(strpos(strtolower($sql), 'drop')!== false){
+      $operacion = DB::statement($sql);
+      return "intruccion realizada con exito";
+    }else if(strpos(strtolower($sql), 'alter')!== false){
+      $operacion = DB::statement($sql);
+      return "intruccion realizada con exito";
+    }else{
+      return "dato error";
+    }
+  } catch (Exception $e) {
+    return $e->errorInfo[2];
+  }
+ });
+
+
 Route::any('/infotablas', function () {
     $op=DB::select("show tables");
     $tables=[];

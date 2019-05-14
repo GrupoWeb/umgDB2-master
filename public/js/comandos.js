@@ -40,7 +40,40 @@ function CreateSQL(form){
     })
 }
 
-
+function CreateDDL(form){
+    $(form).submit(function(e){
+        e.preventDefault();
+        let parametros = $(this).serialize();
+        $.ajax({
+            data: parametros,
+            url: 'DDL?query=',
+            type: "get",
+            contentType: false,
+                cache: false,
+                processData: false,
+            success: function(response){
+                // $('#resultado').html(response);
+                // $('#resultado').show();
+                    swal({
+                        title: "Editor SQL",
+                        text: response,
+                        icon: "success",
+                        button: true,
+                        dangerMode: true,
+                      })
+                      .then((willDelete) => {
+                        if (willDelete) {
+                            // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
+                            var url = "http://localhost/umgDB2-master/public/dDatos"; 
+                            $(location).attr('href',url);
+                           
+                        } 
+                      });
+            }
+        })
+       
+    })
+}
 /*FIN DB2 */
 
 
