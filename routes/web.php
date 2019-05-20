@@ -36,13 +36,13 @@ Route::get('/oDatos','MenuController@oDato');
 Route::any('/operation', function (Request $request) {
   $query = $request->input('query');
   try{
-    if(strpos($query, 'insert')!== false){
+    if(strpos(strtolower($query), 'insert')!== false){
       $op=DB::insert($query);
       return "registro insertado correctamente";
-    }else if(strpos($query, 'delete')!== false){
+    }else if(strpos(strtolower($query), 'delete')!== false){
       $op =DB::delete($query);
       return "registro eliminado correctamente";
-    }else if(strpos($query, 'update')!== false){
+    }else if(strpos(strtolower($query), 'update')!== false){
       $op=DB::update($query);
       return "registro actualizado correctamente";
     }
