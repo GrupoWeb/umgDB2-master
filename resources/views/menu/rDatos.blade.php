@@ -63,11 +63,22 @@ Recuperación de Datos
             databases: [],
             tables: [],
             columns: [],
+            columns2: [],
+            columns3: [],
             selectDatabase: '',
             selectTable: '',
             selectColumns: [],
             sql: '',
-            resultado: []
+            encabezados: [],
+            resultado: [],
+            tipo_join: '',
+            selctTable2: '',
+            selectColumn2: '',
+            selectColumn_table1: '',
+            selectTable3: '',
+            selectColumn3: '',
+            operador: '',
+            valor: ''
         },
         methods:{
             getTables: function(table_schema){
@@ -79,8 +90,8 @@ Recuperación de Datos
                 });
             },
 
-            getColumns: function(){
-                fetch(`recuperacion/database/${this.selectDatabase}/table/${this.selectTable}/get/columns`)
+            getColumns: function(table_name){
+                fetch(`recuperacion/database/${this.selectDatabase}/table/${table_name}/get/columns`)
                 .then(response => response.json())
                 .then(response => {
                     this.columns = [];
@@ -88,8 +99,33 @@ Recuperación de Datos
                 });
             },
 
-            ejecutarConsulta: function(){
+            getColumns2: function(table_name){
+                fetch(`recuperacion/database/${this.selectDatabase}/table/${table_name}/get/columns`)
+                .then(response => response.json())
+                .then(response => {
+                    this.columns2 = []
+                    this.columns2 = response;
+                });
+            },
 
+            getColumns3: function(table_name){
+                fetch(`recuperacion/database/${this.selectDatabase}/table/${table_name}/get/columns`)
+                .then(response => response.json())
+                .then(response => {
+                    this.columns3 = response;
+                });
+            },
+
+            ejecutarConsulta: function(){
+                let data = new FormData(formulario);
+                fetch('recuperacion/ejecutar-sql', {
+                    method: 'POST',
+                    body: data
+                })
+                .then(response => response.json())
+                .then(response => {
+                    this.resultado = response;
+                });
             }
         },
 
@@ -99,13 +135,6 @@ Recuperación de Datos
             .then(response => {
                 this.databases = response;
             });
-        },
-
-        computed: {
-            generarSQL: function(){
-                sql = 'SELECT';
-                sql += '' 
-            }
         }
     });
 
@@ -114,36 +143,31 @@ Recuperación de Datos
 
     $('#database').change(function(event){
         app.selectDatabase = event.target.value;
-        app.getTables(event.target.value);
+        app.getTables(app.selectDatabase);
         $('.js-example-basic-single').select2();
     });
 
     $('#table').change(function(event){
         app.selectTable = event.target.value;
-        app.getColumns();
+        app.columns = app.getColumns(event.target.value);
         $('.js-example-basic-multiple').select2();
     });
 
+
+    $('#table2').change(function(event){
+        app.getColumns2(event.target.value);
+        $('.js-example-basic-multiple').select2();
+    });
+
+    $('#table3').change(function(event){
+        app.getColumns3(event.target.value);
+    });
+
     $columns = $('#columns');
-    $columns.change(function(event){
+    $columns.change(function(){
         app.selectColumns = $columns.val();
     });
 
     var formulario = document.getElementById('formulario');
-
-    formulario.addEventListener('submit', function(e){
-        e.preventDefault();
-        let data = new FormData(formulario);
-
-        fetch('', {
-            method: 'POST',
-            body: data
-        })
-        .then(response => response.json())
-        .then(response => {
-            app.resultado = response;
-        });
-
-    });
 </script>
 @endsection
