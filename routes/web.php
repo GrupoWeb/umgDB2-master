@@ -91,3 +91,9 @@ Route::any('/infotablas', function () {
     }
     return $op;
 });
+
+
+Route::get('recuperacion/get/databases', 'RecuperacionController@getDatabases');
+Route::get('recuperacion/get/tables/{table_schema}', 'RecuperacionController@getTables');
+Route::get('recuperacion/database/{table_schema}/table/{table_name}/get/columns/', 'RecuperacionController@getColumns');
+Route::post('recuperacion/ejecutar-sql', 'RecuperacionController@ejecutarSQL');
