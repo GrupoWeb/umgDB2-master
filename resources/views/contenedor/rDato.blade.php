@@ -49,14 +49,14 @@
                             <div class="form-group row">
                                 <div class="col-md-6 mb-3">
                                     <label for="tabla2"><i class="fa fa-table fa-lg mr-2"></i>Seleccione tabla 1</label>
-                                    <select class="form-control" name="table2" id="table2" required v-model="selectTable2">
+                                    <select class="form-control" name="table2" id="table2" v-model="selectTable2">
                                         <option value=""></option>
                                         <option :value="table.table_name" v-for="table of tables">@{{table.table_name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label><i class="fa fa-columns fa-lg mr-2"></i>Columna de la tabla 1</label>
-                                    <select class="form-control" id="columns2" name="columns2" required v-model="selectColumn2">
+                                    <select class="form-control" id="columns2" name="columns2" v-model="selectColumn2">
                                         <option value=""></option>
                                         <option v-for="column of columns2" :value="column.column_name">@{{column.column_name}}</option>
                                     </select>
@@ -77,14 +77,14 @@
                             <div class="form-group row">
                                 <div class="col-md-3 mb-3">
                                     <label for="tabla3"><i class="fa fa-table fa-lg mr-2"></i>Seleccione tabla</label>
-                                    <select class="form-control" name="table3" id="table3" required v-model="selectTable3">
+                                    <select class="form-control" name="table3" id="table3" v-model="selectTable3">
                                         <option value=""></option>
                                         <option :value="table.table_name" v-for="table of tables">@{{table.table_name}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label><i class="fa fa-columns fa-lg mr-2"></i>Columna</label>
-                                    <select class="form-control" id="columns3" name="columns3" required v-model="selectColumn3">
+                                    <select class="form-control" id="columns3" name="columns3" v-model="selectColumn3">
                                         <option value=""></option>
                                         <option v-for="column of columns" :value="column.column_name">@{{column.column_name}}</option>
                                     </select>
