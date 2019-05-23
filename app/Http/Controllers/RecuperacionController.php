@@ -10,14 +10,28 @@ class RecuperacionController extends Controller
 {
     public function getDatabases()
     {
-    	$db = DB::table('schemata')
-    	->where('schema_name', '!=', 'information_schema')
-    	->where('schema_name', '!=', 'mysql')
-    	->where('schema_name', '!=', 'performance_schema')
-    	->where('schema_name', '!=', 'sys')
-    	->select('schema_name')
-    	->get();
-    	return response()->json($db, 200);
+        $configDb = [
+            'driver'      => 'mysql',
+            'host'        => env('DB_HOST', '206.81.11.212'),
+            'port'        => env('DB_PORT', '3306'),
+            'database'    => "information_schema",
+            'username'    => env('DB_USERNAME', 'AdminDB'),
+            'password'    => env('DB_PASSWORD', 'admin2019'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset'     => 'utf8',
+            'collation'   => 'utf8_unicode_ci',
+            'prefix'      => '',
+            'strict'      => true,
+            'engine'      => null,
+        ];
+
+        \Config::set('database.connections.DB_Serverr', $configDb);
+
+        $conexionSQL = DB::connection('DB_Serverr');
+
+        $resultado = $conexionSQL->select("SELECT schema_name FROM schemata;");
+        
+    	return response()->json($resultado, 200);
     }
 
 
@@ -44,11 +58,11 @@ class RecuperacionController extends Controller
     {
         $configDb = [
             'driver'      => 'mysql',
-            'host'        => env('DB_HOST', '127.0.0.1'),
+            'host'        => env('DB_HOST', '206.81.11.212'),
             'port'        => env('DB_PORT', '3306'),
             'database'    => "$request->database",
-            'username'    => env('DB_USERNAME', 'root'),
-            'password'    => env('DB_PASSWORD', '1234'),
+            'username'    => env('DB_USERNAME', 'AdminDB'),
+            'password'    => env('DB_PASSWORD', 'admin2019'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset'     => 'utf8',
             'collation'   => 'utf8_unicode_ci',
