@@ -13,7 +13,7 @@ class RecuperacionController extends Controller
 
         $conexionSQL = $this->conexionInformationSchema("information_schema");
         $resultado = $conexionSQL->select("SELECT schema_name FROM schemata;");
-        
+
         return response()->json($resultado, 200);
     }
 
@@ -31,13 +31,34 @@ class RecuperacionController extends Controller
     {
         $conexionSQL = $this->conexionInformationSchema("information_schema");
         $resultado = $conexionSQL->select("SELECT column_name FROM columns WHERE table_schema = '$table_schema' AND table_name = '$table_name'");
-        
+
         return response()->json($resultado, 200);
     }
 
     public function ejecutarSQL(Request $request)
     {
+<<<<<<< HEAD
+        $configDb = [
+            'driver'      => 'mysql',
+            'host'        => env('DB_HOST', '127.0.0.1'),
+            'port'        => env('DB_PORT', '3306'),
+            'database'    => "$request->database",
+            'username'    => env('DB_USERNAME', 'root'),
+            'password'    => env('DB_PASSWORD', '1234'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset'     => 'utf8',
+            'collation'   => 'utf8_unicode_ci',
+            'prefix'      => '',
+            'strict'      => true,
+            'engine'      => null,
+        ];
+
+        Config::set('database.connections.DB_Serverr', $configDb);
+
+        $conexionSQL = DB::connection('DB_Serverr');
+=======
         $conexionSQL = $this->conexionInformationSchema("$request->database");
+>>>>>>> ca7fff4caf2e0f5373ca5e2720a132408ff49bbd
 
         $query = "SELECT ";
 
@@ -64,7 +85,7 @@ class RecuperacionController extends Controller
 
         $query .= ";";
         $resultado = $conexionSQL->select($query);
-        
+
         return response()->json($resultado, 200);
     }
 

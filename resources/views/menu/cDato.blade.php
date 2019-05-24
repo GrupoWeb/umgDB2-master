@@ -4,7 +4,7 @@
 @endsection
 
 @section('logo')
-    <img src= "img/logo.png" class="logo" alt="">
+<img src= "img/logo.png" class="logo" alt="">
 @endsection
 
 @section('Title')
@@ -52,4 +52,90 @@
 
 @section('Contenido')
     @include('contenedor.cDato')
+@endsection
+
+@section('vue')
+<script>
+const app = new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Controlador de datos',
+            users: [],
+            databases: [],
+            objets: [],
+            resultQry: '',
+            qryRes: '',
+            valDatabase: '',
+        },
+        methods:{
+            execDcl: function(){
+              let data = new FormData(form);
+
+              $("#loadingGif").show();
+              fetch('Dcl', {
+                  method: 'post',
+                  body: data
+              }).catch(function(error) { // (*)
+                console.log("error");
+              }).then(function(res) {
+                if(res.status == 500){
+                  return "[]";
+                }else{
+                  return res.text();
+                }
+              }).then(function(html) {
+                  var resultLocal = JSON.parse(html);
+                  $("#resultSuccess").hide();
+                  $("#resultDanger").hide();
+                  $("#grantMsj").hide();
+                  $("#revokeMsj").hide();
+
+                  var qry = resultLocal.qry
+                  var premission = resultLocal.premission
+                  $("#resultDiv").show();
+                  if (qry === undefined || qry === null) {
+                    $("#resultDanger").show();
+                  }else{
+                    $("#resultSuccess").show();
+                    $("#qryResult").html(qry);
+                    if(premission == "GRANT"){
+                      $("#grantMsj").show();
+                    }else{
+                      $("#revokeMsj").show();
+                    }
+                  }
+                  $("#loadingGif").hide();
+              })
+            },
+            getObjets: function(database){
+              fetch(`DclController/get/objets/${database}`)
+              .then(response => response.json())
+              .then(response => {
+                  this.objets = [];
+                  this.objets = response;
+              });
+            }
+        },
+        created: function(){
+            fetch('DclController/get/users')
+            .then(response => response.json())
+            .then(response => {
+                this.users = response;
+            });
+
+            fetch('DclController/get/databases')
+            .then(response => response.json())
+            .then(response => {
+                this.databases = response;
+            });
+        }
+    });
+
+    $('#database').change(function(event){
+        app.valDatabase = event.target.value;
+        app.getObjets(app.valDatabase);
+    });
+
+    var form = document.getElementById('frmDcl');
+</script>
 @endsection

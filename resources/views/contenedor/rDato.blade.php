@@ -17,7 +17,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3">                            
+                        <div class="col-md-6 mb-3">
                             <label for="database"><i class="fa fa-table fa-lg mr-2"></i>Seleccione una tabla</label>
                             <select class="js-example-basic-single form-control" name="table" id="table" required>
                                 <option value=""></option>
@@ -104,7 +104,7 @@
                                     <input type="text" name="where" class="form-control" v-model="valor">
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="mt-3"><i class="fa fa-terminal fa-lg mr-2"></i>Sentencia SQL que se ejecutará</label>
@@ -114,7 +114,7 @@
                             <br>
                             <span class="text-primary" v-if="selectTable != ''">FROM</span> <span class="text-secondary">@{{selectTable}}</span>
                             <br>
-                            <span class="text-primary">@{{tipo_join}}</span> 
+                            <span class="text-primary">@{{tipo_join}}</span>
                             <span class="text-info"> @{{selectTable}}.@{{selectColumn_table1}}</span>
                             <span class="text-primary"> =</span>
                             <span class="text-info"> @{{selectTable2}}.@{{selectColumn2}}</span>
