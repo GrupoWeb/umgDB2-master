@@ -15,12 +15,12 @@
 @section('Menu')
 <ul>
         <li>
-            <a href="{{ action('MenuController@index') }}" id="dash" class="list-group-item list-group-item-action  waves-effect">
+            <a href="{{ action('MenuController@index') }}" id="dash" class="list-group-item list-group-item-action active waves-effect">
                 <i class="fa fa-pie-chart mr-3"></i>Dashboard BI
             </a>
         </li>
         <li>
-            <a href="{{ action('MenuController@rDato') }}"  id="capacitadores" class="list-group-item list-group-item-action active waves-effect">
+            <a href="{{ action('MenuController@rDato') }}"  id="capacitadores" class="list-group-item list-group-item-action  waves-effect">
                 <i class="fa fa-user mr-3"></i>Recuperación de Datos
             </a>
         </li>

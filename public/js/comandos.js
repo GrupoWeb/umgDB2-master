@@ -1,12 +1,12 @@
-function CargarPagina(contenedor,pagina){
+function CargarPagina(contenedor, pagina) {
     $(contenedor).load(pagina);
 }
 
 
 /*DB2*/
 
-function CreateSQL(form){
-    $(form).submit(function(e){
+function CreateSQL(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize();
         $.ajax({
@@ -14,34 +14,56 @@ function CreateSQL(form){
             url: 'operation?query=',
             type: "get",
             contentType: false,
-                cache: false,
-                processData: false,
-            success: function(response){
+            cache: true,
+            processData: false,
+            success: function(response) {
                 // $('#resultado').html(response);
                 // $('#resultado').show();
+
+                if (response.result == false) {
                     swal({
-                        title: "Editor SQL",
-                        text: response,
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
-                            var url = "http://localhost/umgDB2-master/public/mDatos"; 
-                            $(location).attr('href',url);
-                           
-                        } 
-                      });
+                            title: "Editor SQL",
+                            text: response.message,
+                            icon: "danger",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+
+                                // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
+                                var url = "http://localhost/umgDB2-master/public/mDatos";
+                                $(location).attr('href', url);
+
+                            }
+                        });
+                } else {
+                    swal({
+                            title: "Editor SQL",
+                            text: response.message,
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+
+                                // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
+                                var url = "http://localhost/umgDB2-master/public/mDatos";
+                                $(location).attr('href', url);
+
+                            }
+                        });
+                }
+
             }
         })
-       
+
     })
 }
 
-function CreateDDL(form){
-    $(form).submit(function(e){
+function CreateDDL(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize();
         $.ajax({
@@ -49,29 +71,29 @@ function CreateDDL(form){
             url: 'DDL?query=',
             type: "get",
             contentType: false,
-                cache: false,
-                processData: false,
-            success: function(response){
+            cache: false,
+            processData: false,
+            success: function(response) {
                 // $('#resultado').html(response);
                 // $('#resultado').show();
-                    swal({
+                swal({
                         title: "Editor SQL",
                         text: response,
                         icon: "success",
                         button: true,
                         dangerMode: true,
-                      })
-                      .then((willDelete) => {
+                    })
+                    .then((willDelete) => {
                         if (willDelete) {
                             // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
-                            var url = "http://localhost/umgDB2-master/public/dDatos"; 
-                            $(location).attr('href',url);
-                           
-                        } 
-                      });
+                            var url = "http://localhost/umgDB2-master/public/dDatos";
+                            $(location).attr('href', url);
+
+                        }
+                    });
             }
         })
-       
+
     })
 }
 /*FIN DB2 */
@@ -79,90 +101,90 @@ function CreateDDL(form){
 
 
 
-function addCapacitacion(form){
-    $(form).submit(function(e){
+function addCapacitacion(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'model/php/addCapacitacion.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Capacitaciones",
-                        text: "Dato Almacenado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar('view/capacitacion.php','Capacitaciones');
-                        } 
-                      });
-                                       
+                            title: "Capacitaciones",
+                            text: "Dato Almacenado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar('view/capacitacion.php', 'Capacitaciones');
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
-function editarCapacitacion(form,pagina,modal) {
-    $(form).submit(function (e) {
+function editarCapacitacion(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/UCapacitacion.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitaciones",
-                        text: "Dato Modificado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitaciones');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitaciones",
+                            text: "Dato Modificado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitaciones');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
     })
 }
 
-function deleteCapacitacion(form,pagina,modal) {
-    $(form).submit(function (e) {
+function deleteCapacitacion(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/DCapacitacion.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitaciones",
-                        text: "Dato Eliminado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitaciones');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitaciones",
+                            text: "Dato Eliminado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitaciones');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
@@ -170,70 +192,70 @@ function deleteCapacitacion(form,pagina,modal) {
 }
 
 
-function CalcularEdad(dato){
-    
-    fecha = $("#"+dato).val();
-    $.get( "model/php/calcular.php", {fecha: fecha}, function( data ) {
-           $('#edad').val(data);
-     });  
+function CalcularEdad(dato) {
+
+    fecha = $("#" + dato).val();
+    $.get("model/php/calcular.php", { fecha: fecha }, function(data) {
+        $('#edad').val(data);
+    });
 }
 
-function addPersona(form){
-    $(form).submit(function(e){
+function addPersona(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize();
-       // console.log(parametros);
+        // console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/addPersona.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Capacitadores",
-                        text: "Dato Almacenado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar('view/capacitador.php', 'Capacitadores');
-                        } 
-                      });
-                                       
+                            title: "Capacitadores",
+                            text: "Dato Almacenado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar('view/capacitador.php', 'Capacitadores');
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
 
-function editarPersona(form,pagina,modal) {
-    $(form).submit(function (e) {
+function editarPersona(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/UPersona.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitador",
-                        text: "Dato Modificado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitadores');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitador",
+                            text: "Dato Modificado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitadores');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
@@ -241,30 +263,30 @@ function editarPersona(form,pagina,modal) {
 }
 
 
-function deletePersona(form,pagina,modal) {
-    $(form).submit(function (e) {
+function deletePersona(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/DPersona.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitaciones",
-                        text: "Dato Eliminado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitaciones');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitaciones",
+                            text: "Dato Eliminado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitaciones');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
@@ -272,30 +294,30 @@ function deletePersona(form,pagina,modal) {
 }
 
 
-function asignacionPersona(form,pagina,modal) {
-    $(form).submit(function (e) {
+function asignacionPersona(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/APersona.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitaciones",
-                        text: "Dato Eliminado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitaciones');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitaciones",
+                            text: "Dato Eliminado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitaciones');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
@@ -305,121 +327,121 @@ function asignacionPersona(form,pagina,modal) {
 
 
 function DasignacionPersona(form, pagina, modal) {
-    $(form).submit(function (e) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/DAPersona.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitadores",
-                        text: "Dato Eliminado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitadores');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitadores",
+                            text: "Dato Eliminado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitadores');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
     })
 }
 
-function addPregunta(form){
-    $(form).submit(function(e){
+function addPregunta(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize();
-       // console.log(parametros);
+        // console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/addPregunta.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Preguntas",
-                        text: "Dato Almacenado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar('view/preguntas.php', 'Preguntas');
-                        } 
-                      });
-                                       
+                            title: "Preguntas",
+                            text: "Dato Almacenado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar('view/preguntas.php', 'Preguntas');
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
 
-function editarPregunta(form,pagina,modal) {
-    $(form).submit(function (e) {
+function editarPregunta(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/UPregunta.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitador",
-                        text: "Dato Modificado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitadores');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitador",
+                            text: "Dato Modificado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitadores');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
     })
 }
 
-function deletePregunta(form,pagina,modal) {
-    $(form).submit(function (e) {
+function deletePregunta(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
-        //console.log(parametros);
+            //console.log(parametros);
         $.ajax({
             data: parametros,
             url: 'model/php/DPregunta.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
-                        title: "Capacitaciones",
-                        text: "Dato Eliminado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar(pagina,'Capacitaciones');
-                        } 
-                      });
-                      CierraPopup(modal);
+                            title: "Capacitaciones",
+                            text: "Dato Eliminado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar(pagina, 'Capacitaciones');
+                            }
+                        });
+                    CierraPopup(modal);
                 }
             }
         })
@@ -427,7 +449,7 @@ function deletePregunta(form,pagina,modal) {
 }
 
 function UploadFile() {
-    $('#upload').submit(function (e) {
+    $('#upload').submit(function(e) {
         e.preventDefault();
 
         var formData = new FormData($(this)[0]);
@@ -438,7 +460,7 @@ function UploadFile() {
             data: formData,
             contentType: false,
             processData: false,
-            success: function (event) {
+            success: function(event) {
                 if (event) {
                     alert("Dato Ingresado");
                     $("#contenedor").load("catalogos/uploadFile.php");
@@ -451,8 +473,8 @@ function UploadFile() {
 }
 
 
-function addAdjunto(form){
-    $(form).submit(function(e){
+function addAdjunto(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize();
         console.log(parametros);
@@ -461,33 +483,33 @@ function addAdjunto(form){
             url: 'model/php/uploadfile.php',
             type: "post",
             contentType: false,
-                cache: false,
-                processData: false,
-            success: function(response){
-                if(response = 'success'){
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Adjunto",
-                        text: "Dato Almacenado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar('view/ingresoCapa.php', 'Control de Capacitaciones');
-                        } 
-                      });
-                                       
+                            title: "Adjunto",
+                            text: "Dato Almacenado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar('view/ingresoCapa.php', 'Control de Capacitaciones');
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
 
 function addIndicador(form) {
-    $(form).submit(function(e){
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize();
         $.ajax({
@@ -495,27 +517,27 @@ function addIndicador(form) {
             url: 'model/php/addIndicador.php',
             type: "post",
             contentType: false,
-                cache: false,
-                processData: false,
-            success: function(response){
-                if(response = 'success'){
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Indicador",
-                        text: "Dato Almacenado!",
-                        icon: "success",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            Iniciar('view/indicadores.php', 'Indicadores');
-                        } 
-                      });
-                                       
+                            title: "Indicador",
+                            text: "Dato Almacenado!",
+                            icon: "success",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                Iniciar('view/indicadores.php', 'Indicadores');
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
@@ -536,141 +558,141 @@ function addIndicador(form) {
 
 
 
-function enviarAlimento(form){
-    $(form).submit(function(e){
+function enviarAlimento(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addAlimento.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
 
                     swal({
-                        title: "Alimento",
-                        text: "Dato Almacenado!",
-                        icon: "warning",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
-                        
-                        } 
-                      });
+                            title: "Alimento",
+                            text: "Dato Almacenado!",
+                            icon: "warning",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
+
+                            }
+                        });
                 }
             }
         })
-       
+
     })
 }
 
-function addTiempo(form){
-    $(form).submit(function(e){
+function addTiempo(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addTime.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Tiempo de Comida",
-                        text: "Dato Almacenado!",
-                        icon: "warning",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
-                        
-                        } 
-                      });
-                                       
+                            title: "Tiempo de Comida",
+                            text: "Dato Almacenado!",
+                            icon: "warning",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
+
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
 
-function addMedico(form){
-    $(form).submit(function(e){
+function addMedico(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addmedico.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Médico Asignado y Guardado",
-                        text: "Dato Almacenado!",
-                        icon: "warning",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
-                        
-                        } 
-                      });
-                                       
+                            title: "Médico Asignado y Guardado",
+                            text: "Dato Almacenado!",
+                            icon: "warning",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
+
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
-function addCita(form){
-    $(form).submit(function(e){
+function addCita(form) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addCita.php',
             type: "post",
-            success: function(response){
-                if(response = 'success'){
+            success: function(response) {
+                if (response = 'success') {
                     swal({
-                        title: "Médico Asignado y Guardado",
-                        text: "Dato Almacenado!",
-                        icon: "warning",
-                        button: true,
-                        dangerMode: true,
-                      })
-                      .then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
-                        
-                        } 
-                      });
-                                       
+                            title: "Médico Asignado y Guardado",
+                            text: "Dato Almacenado!",
+                            icon: "warning",
+                            button: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location.href = "http://localhost/proyecto/proyectoDB/odontologia/";
+
+                            }
+                        });
+
                 }
             }
         })
-       
+
     })
 }
 
 
 function addDieta(form) {
-    $(form).submit(function (e) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addDieta.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
                             title: "DIETA GUARDADA",
@@ -694,14 +716,14 @@ function addDieta(form) {
 }
 
 function addTipoOdontologia(form) {
-    $(form).submit(function (e) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addOtipo.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
                             title: "AGREGADO EXITOSAMENTE",
@@ -725,14 +747,14 @@ function addTipoOdontologia(form) {
 }
 
 function addOdontologia(form) {
-    $(form).submit(function (e) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/addOdontologia.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal({
                             title: "AGREGADO EXITOSAMENTE",
@@ -757,8 +779,8 @@ function addOdontologia(form) {
 
 
 
-function editarAlimento(form,pagina,modal) {
-    $(form).submit(function (e) {
+function editarAlimento(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         console.log(parametros);
@@ -766,7 +788,7 @@ function editarAlimento(form,pagina,modal) {
             data: parametros,
             url: 'php/Ualimento.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Edición Exitosa", "", "success");
                     CierraPopup(modal);
@@ -778,8 +800,8 @@ function editarAlimento(form,pagina,modal) {
 }
 
 
-function editarCita(form,pagina,modal) {
-    $(form).submit(function (e) {
+function editarCita(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         console.log(parametros);
@@ -787,7 +809,7 @@ function editarCita(form,pagina,modal) {
             data: parametros,
             url: 'php/Ucita.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Edición Exitosa", "", "success");
                     CierraPopup(modal);
@@ -800,8 +822,8 @@ function editarCita(form,pagina,modal) {
 
 
 
-function editarTiempo(form,pagina,modal) {
-    $(form).submit(function (e) {
+function editarTiempo(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         console.log(parametros);
@@ -809,7 +831,7 @@ function editarTiempo(form,pagina,modal) {
             data: parametros,
             url: 'php/Utiempo.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Edición Exitosa", "", "success");
                     CierraPopup(modal);
@@ -821,7 +843,7 @@ function editarTiempo(form,pagina,modal) {
 }
 
 function editarEspecialidad(form, pagina, modal) {
-    $(form).submit(function (e) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         console.log(parametros);
@@ -829,7 +851,7 @@ function editarEspecialidad(form, pagina, modal) {
             data: parametros,
             url: 'php/Uespecialidad.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Edición Exitosa", "", "success");
                     CierraPopup(modal);
@@ -841,15 +863,15 @@ function editarEspecialidad(form, pagina, modal) {
 }
 
 
-function eliminarAlimento(form,pagina,modal) {
-    $(form).submit(function (e) {
+function eliminarAlimento(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/Dalimento.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Dato Eliminado", "", "success");
                     CierraPopup(modal);
@@ -861,15 +883,15 @@ function eliminarAlimento(form,pagina,modal) {
     })
 }
 
-function eliminarTiempo(form,pagina,modal) {
-    $(form).submit(function (e) {
+function eliminarTiempo(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/Dtiempo.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Dato Eliminado", "", "success");
                     CierraPopup(modal);
@@ -881,15 +903,15 @@ function eliminarTiempo(form,pagina,modal) {
     })
 }
 
-function eliminarCita(form,pagina,modal) {
-    $(form).submit(function (e) {
+function eliminarCita(form, pagina, modal) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/Dcita.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Dato Eliminado", "", "success");
                     CierraPopup(modal);
@@ -902,14 +924,14 @@ function eliminarCita(form,pagina,modal) {
 }
 
 function eliminarEspecialidad(form, pagina, modal) {
-    $(form).submit(function (e) {
+    $(form).submit(function(e) {
         e.preventDefault();
         let parametros = $(this).serialize()
         $.ajax({
             data: parametros,
             url: 'php/Despecialidad.php',
             type: "post",
-            success: function (response) {
+            success: function(response) {
                 if (response = 'success') {
                     swal("Dato Eliminado", "", "success");
                     CierraPopup(modal);
@@ -926,7 +948,7 @@ function Cpersona(url, lugar) {
     $.ajax({
         url: url,
         type: 'post',
-        success: function (r) {
+        success: function(r) {
             $(lugar).html(r);
         }
     });
@@ -936,7 +958,7 @@ function COMBO(url, lugar) {
     $.ajax({
         url: url,
         type: 'post',
-        success: function (r) {
+        success: function(r) {
             $(lugar).html(r);
         }
     });
@@ -944,54 +966,54 @@ function COMBO(url, lugar) {
 
 
 
-function llenarCombos(url,lugar,idselect,nameselect) {
-	$.ajax({
-		url: url,
-		type: 'post',
-		success: function (r) {
-			$(lugar).empty();
-			r = JSON.parse(r);
-			sedeItem = crearElemento('option', '__', '__', 'Seleccione...', '__', '__');
-			sedeItem.setAttribute('value', '');
+function llenarCombos(url, lugar, idselect, nameselect) {
+    $.ajax({
+        url: url,
+        type: 'post',
+        success: function(r) {
+            $(lugar).empty();
+            r = JSON.parse(r);
+            sedeItem = crearElemento('option', '__', '__', 'Seleccione...', '__', '__');
+            sedeItem.setAttribute('value', '');
             $(lugar).append(sedeItem);
-			for (i = 0; i < r.length; i++) {
-				option = crearElemento('option', '__', '__', r[i][nameselect], '__', r[i][idselect]);
-				$(lugar).append(option);
-			}
-		}
-	});
+            for (i = 0; i < r.length; i++) {
+                option = crearElemento('option', '__', '__', r[i][nameselect], '__', r[i][idselect]);
+                $(lugar).append(option);
+            }
+        }
+    });
 }
 
 
-function llenarCombosID(url, lugar,id) {
-	
-	var dato = "id="+id;
-	$.ajax({
-		url: url,
-		type: 'post',
-		data: dato,
-		success: function (r) {
-			$(lugar).empty();
-			r = JSON.parse(r);
-			sedeItem = crearElemento('option', '__', '__', 'Seleccione...', '__', '__');
-			sedeItem.setAttribute('value', '');
-			$(lugar).append(sedeItem);
-			for (i = 0; i < r.length; i++) {
-				option = crearElemento('option', '__', '__', r[i][1], '__', r[i][0]);
-				$(lugar).append(option);
-			}
-		}
-	});
+function llenarCombosID(url, lugar, id) {
+
+    var dato = "id=" + id;
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: dato,
+        success: function(r) {
+            $(lugar).empty();
+            r = JSON.parse(r);
+            sedeItem = crearElemento('option', '__', '__', 'Seleccione...', '__', '__');
+            sedeItem.setAttribute('value', '');
+            $(lugar).append(sedeItem);
+            for (i = 0; i < r.length; i++) {
+                option = crearElemento('option', '__', '__', r[i][1], '__', r[i][0]);
+                $(lugar).append(option);
+            }
+        }
+    });
 }
 
 function crearElemento(elemento, identificador, clase, texto, ruta, valor) {
-	item = document.createElement(elemento);
-	if (identificador !== '__') { item.id = identificador; }
-	if (clase !== '__') { item.className = clase; }
-	if (texto !== '__') { item.innerText = texto; }
-	if (ruta !== '__') { item.dataset.cargarVista = ruta; }
-	if (valor !== '__') { item.value = valor; }
-	return item;
+    item = document.createElement(elemento);
+    if (identificador !== '__') { item.id = identificador; }
+    if (clase !== '__') { item.className = clase; }
+    if (texto !== '__') { item.innerText = texto; }
+    if (ruta !== '__') { item.dataset.cargarVista = ruta; }
+    if (valor !== '__') { item.value = valor; }
+    return item;
 }
 
 
