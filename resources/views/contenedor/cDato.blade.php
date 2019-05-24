@@ -5,6 +5,11 @@
         @{{titulo}}
       </div>
       <div class="card-body">
+        <h1 style="text-align:center;display:none;" id="loadingGif">
+          Cargando...
+          <img src="https://static-steelkiwi-dev.s3.amazonaws.com/media/filer_public/4e/07/4e07eece-7c84-46e2-944d-1a6b856d7b5f/463ff844-6f36-4ffe-b051-fea983d39223.gif"
+          style="width:225px;">
+        </h1>
         <form action="" id="frmDcl" @submit.prevent="execDcl()">
           {{ csrf_field() }}
           <div class="form-group row">

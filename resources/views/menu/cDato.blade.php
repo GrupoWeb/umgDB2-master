@@ -71,6 +71,7 @@ const app = new Vue({
             execDcl: function(){
               let data = new FormData(form);
 
+              $("#loadingGif").show();
               fetch('Dcl', {
                   method: 'post',
                   body: data
@@ -103,6 +104,7 @@ const app = new Vue({
                       $("#revokeMsj").show();
                     }
                   }
+                  $("#loadingGif").hide();
               })
             },
             getObjets: function(database){
