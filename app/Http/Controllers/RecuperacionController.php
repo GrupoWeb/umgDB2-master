@@ -57,7 +57,7 @@ class RecuperacionController extends Controller
             'engine'      => null,
         ];
 
-        \Config::set('database.connections.DB_Serverr', $configDb);
+        Config::set('database.connections.DB_Serverr', $configDb);
 
         $conexionSQL = DB::connection('DB_Serverr');
 
@@ -86,7 +86,7 @@ class RecuperacionController extends Controller
 
         $query .= ";";
         $resultado = $conexionSQL->select($query);
-        
+
         return response()->json($resultado, 200);
     }
 }

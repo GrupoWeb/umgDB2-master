@@ -31,8 +31,6 @@ Route::get('/oDatos','MenuController@oDato');
 
 
 
-
-
 Route::any('/operation', function (Request $request) {
   $query = $request->input('query');
   try{
@@ -92,8 +90,16 @@ Route::any('/infotablas', function () {
     return $op;
 });
 
-
 Route::get('recuperacion/get/databases', 'RecuperacionController@getDatabases');
 Route::get('recuperacion/get/tables/{table_schema}', 'RecuperacionController@getTables');
 Route::get('recuperacion/database/{table_schema}/table/{table_name}/get/columns/', 'RecuperacionController@getColumns');
 Route::post('recuperacion/ejecutar-sql', 'RecuperacionController@ejecutarSQL');
+
+
+//DCL START
+//Dcl
+Route::get('DclController/get/objets/{database}', 'DclController@getObjets');
+Route::get('DclController/get/databases', 'DclController@getDatabases');
+Route::get('DclController/get/users', 'DclController@getUsers');
+Route::post('Dcl', 'DclController@execdcl');
+//DCL END
