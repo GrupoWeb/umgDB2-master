@@ -32,7 +32,7 @@ function CreateSQL(form) {
                             if (willDelete) {
 
                                 // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
-                                var url = "http://157.230.161.41/umgDB2-master/public/mDatos";
+                                var url = "http://157.230.161.41/mDatos";
                                 $(location).attr('href', url);
 
                             }
@@ -49,7 +49,7 @@ function CreateSQL(form) {
                             if (willDelete) {
 
                                 // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
-                                var url = "http://157.230.161.41/umgDB2-master/public/mDatos";
+                                var url = "http://157.230.161.41/mDatos";
                                 $(location).attr('href', url);
 
                             }
@@ -85,8 +85,8 @@ function CreateDDL(form) {
                     })
                     .then((willDelete) => {
                         if (willDelete) {
-                            // Iniciar('../resources/views/menu/mDato.blade.php','Grupo 2');
-                            var url = "http://157.230.161.41/umgDB2-master/public/dDatos";
+                            // Iniciar('../resourcmDato.blade.php','Grupo 2');
+                            var url = "http://157.230.161.41/dDatos";
                             $(location).attr('href', url);
 
                         }
