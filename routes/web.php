@@ -29,30 +29,6 @@ Route::get('/oDatos','MenuController@oDato');
 //---------------------------------------------------
 
 
-
-
-Route::any('/operation', function (Request $request) {
-  $query = $request->input('query');
-  try{
-    if(strpos(strtolower($query), 'insert')!== false){
-      $op=DB::insert($query);
-      return "registro insertado correctamente";
-    }else if(strpos(strtolower($query), 'delete')!== false){
-      $op =DB::delete($query);
-      return "registro eliminado correctamente";
-    }else if(strpos(strtolower($query), 'update')!== false){
-      $op=DB::update($query);
-      return "registro actualizado correctamente";
-    }
-    else{
-      return "operacion no admitida";
-    }
-  } catch(Exception $e){
-    return $e->errorInfo[2];
-  }
-
-});
-
 Route::any('/DDL',function(Request $request){
   $sql = $request->input('query');
   try {
@@ -73,22 +49,11 @@ Route::any('/DDL',function(Request $request){
   }
  });
 
+//DML
 
-Route::any('/infotablas', function () {
-    $op=DB::select("show tables");
-    $tables=[];
-    foreach ($op as $table => $value) {
-      $fields=[];
-      $tablename;
-      foreach ($value as $key => $val) {
-        $tablename = $val;
-        $fields=DB::select('describe '.$val);
-      }
-      $op[$table]->tablename = $tablename;
-      $op[$table]->fields = $fields;
-    }
-    return $op;
-});
+Route::get('/operation', 'DMLController@getOperation');
+Route::get('/infotablas', 'DMLController@getTables');
+
 
 Route::get('recuperacion/get/databases', 'RecuperacionController@getDatabases');
 Route::get('recuperacion/get/tables/{table_schema}', 'RecuperacionController@getTables');
