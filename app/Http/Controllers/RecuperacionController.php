@@ -38,7 +38,7 @@ class RecuperacionController extends Controller
     public function ejecutarSQL(Request $request)
     {
         $conexionSQL = $this->conexionInformationSchema("$request->database");
-        
+
         $query = "SELECT ";
 
         $columnas = $request->columns;
